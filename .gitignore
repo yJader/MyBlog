@@ -43,7 +43,8 @@ test/
 
 ### My Ignore
 
+!/SGBlog/resources/front-end-project/
 /SGBlog/
-!/SGBlog/资源/前端工程/
+
 /yj-framework/src/main/resources/key.properties
 

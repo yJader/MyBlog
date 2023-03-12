@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "oss",
+      "type": "com.yj.OSSTest",
+      "sourceType": "com.yj.OSSTest"
+    },
+    {
+      "name": "test",
+      "type": "com.yj.PropertiesTest",
+      "sourceType": "com.yj.PropertiesTest"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
