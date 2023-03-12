@@ -31,4 +31,19 @@ hs_err_pid*
 *.iml
 out
 gen
-!/SGBlog/
+
+### Vue template
+# gitignore template for Vue.js projects
+#
+# Recommended template: Node.gitignore
+
+docs/_book
+
+test/
+
+### My Ignore
+
+/SGBlog/
+!/SGBlog/资源/前端工程/
+/yj-framework/src/main/resources/key.properties
+
