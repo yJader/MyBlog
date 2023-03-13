@@ -4,9 +4,10 @@ package com.yj.enums;
  * @Author yJade
  * @Date 2023-02-09 21:43
  * @Package com.yj.enums
- * @Description: TODO
+ * @Description: 
  */
 public enum AppHttpCodeEnum {
+    // TODO 删除部分错误信息, 改为使用validation进行数据验证
     // 成功
     SUCCESS(200,"操作成功"),
     // 登录

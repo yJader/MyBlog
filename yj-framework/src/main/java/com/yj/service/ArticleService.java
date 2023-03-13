@@ -14,7 +14,7 @@ import com.yj.domain.vo.PageVo;
  * @Author yJade
  * @Date 2023-02-09 20:44
  * @Package com.yj.service
- * @Description: TODO
+ * @Description: 
  */
 public interface ArticleService extends IService<Article> {
 

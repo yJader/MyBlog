@@ -1,32 +1,24 @@
-package com.yj.domain.dto;
+package com.yj.domain.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.yj.domain.entity.Menu;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
- * @Description: 新建菜单Dto
- * @Package com.yj.domain.dto
+ * @Description:
+ * @Package com.yj.domain.vo
  * @Author yJade
- * @Date 2023-03-13 0:28
+ * @Date 2023-03-13 11:49
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuDto {
+public class MenuDetailVo {
     /**
      * 菜单ID
      */
-    @TableId
     @ApiModelProperty("菜单ID")
-    @NotNull
     private Long id;
     /**
      * 菜单名称
@@ -49,16 +41,6 @@ public class MenuDto {
     @ApiModelProperty("路由地址")
     private String path;
     /**
-     * 组件路径
-     */
-    @ApiModelProperty("组件路径")
-    private String component;
-    /**
-     * 是否为外链（0是 1否）
-     */
-    @ApiModelProperty("是否为外链（0是 1否）")
-    private Integer isFrame;
-    /**
      * 菜单类型（M目录 C菜单 F按钮）
      */
     @ApiModelProperty("菜单类型（M目录 C菜单 F按钮）")
@@ -74,11 +56,6 @@ public class MenuDto {
     @ApiModelProperty("菜单状态（0正常 1停用）")
     private String status;
     /**
-     * 权限标识
-     */
-    @ApiModelProperty("权限标识")
-    private String perms;
-    /**
      * 菜单图标
      */
     @ApiModelProperty("菜单图标")
@@ -89,7 +66,4 @@ public class MenuDto {
     @ApiModelProperty("备注")
     private String remark;
 
-    @ApiModelProperty("子菜单")
-    @TableField(exist = false)
-    private List<Menu> children;
 }

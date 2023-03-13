@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @Author yJade
  * @Date 2023-02-09 18:02
  * @Package com.yj
- * @Description: TODO
+ * @Description: 
  */
 @MapperScan("com.yj.mapper")
 @SpringBootApplication

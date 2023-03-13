@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  * @Author yJade
  * @Date 2023-02-10 19:33
  * @Package com.yj.domain.vo
- * @Description: TODO
+ * @Description: 
  */
 @Data
 @NoArgsConstructor

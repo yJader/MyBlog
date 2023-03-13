@@ -4,7 +4,7 @@ package com.yj.constants;
  * @Author yJade
  * @Date 2023-02-10 0:02
  * @Package com.yj.constants
- * @Description: TODO
+ * @Description: 
  */
 public class SystemConstants {
     /**

@@ -17,7 +17,7 @@ import java.util.List;
  * @Author yJade
  * @Date 2023-02-09 23:33
  * @Package com.yj.config
- * @Description: TODO
+ * @Description: 
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

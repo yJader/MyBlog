@@ -1,11 +1,5 @@
 package com.yj.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yj.constants.SystemConstants;
@@ -15,6 +9,12 @@ import com.yj.service.MenuService;
 import com.yj.utils.SecurityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 菜单权限表(Menu)表服务实现类
@@ -66,6 +66,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         // 排序
         queryWrapper.orderByAsc(Menu::getParentId, Menu::getOrderNum);
         return list(queryWrapper);
+    }
+
+    @Override
+    public boolean hasChild(Long menuId) {
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Menu::getParentId, menuId);
+        // 直接使用count
+        return count(queryWrapper) != 0;
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.Date;
  * @Author yJade
  * @Date 2023-02-11 14:53
  * @Package com.yj.domain.vo
- * @Description: TODO
+ * @Description: 
  */
 @Data
 @NoArgsConstructor

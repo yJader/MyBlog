@@ -10,7 +10,7 @@ import java.util.List;
  * @Author yJade
  * @Date 2023-02-10 20:18
  * @Package com.yj.domain.vo
- * @Description: TODO
+ * @Description: 
  */
 @Data
 @NoArgsConstructor

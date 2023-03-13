@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @Author yJade
  * @Date 2023-02-10 20:27
  * @Package com.yj.config
- * @Description: TODO
+ * @Description: 
  */
 @Configuration
 public class MyBatisConfig {
