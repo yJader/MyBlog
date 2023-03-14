@@ -1,10 +1,12 @@
 package com.yj.service;
 
-import java.util.Date;
-import java.util.List;
-
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yj.domain.dto.role.AddRoleDto;
 import com.yj.domain.entity.Role;
+import com.yj.domain.vo.PageVo;
+import com.yj.domain.vo.RoleVo;
+
+import java.util.List;
 
 /**
  * 角色信息表(Role)表服务接口
@@ -14,5 +16,9 @@ import com.yj.domain.entity.Role;
  */
 public interface RoleService extends IService<Role> {
 
+    PageVo<RoleVo> roleList(Integer pageNum, Integer pageSize, String roleName, String status);
+
     List<String> selectRoleKeyByUserId(Long id);
+
+    void add(AddRoleDto addRoleDto);
 }

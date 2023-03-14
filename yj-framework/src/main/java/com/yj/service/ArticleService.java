@@ -2,12 +2,12 @@ package com.yj.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yj.domain.ResponseResult;
-import com.yj.domain.dto.AddArticleDto;
-import com.yj.domain.dto.EditArticleDto;
+import com.yj.domain.dto.article.AddArticleDto;
+import com.yj.domain.dto.article.EditArticleDto;
 import com.yj.domain.entity.Article;
-import com.yj.domain.vo.AdminArticleListVo;
-import com.yj.domain.vo.ArticleListVo;
-import com.yj.domain.vo.ArticleVo;
+import com.yj.domain.vo.article.AdminArticleListVo;
+import com.yj.domain.vo.article.ArticleListVo;
+import com.yj.domain.vo.article.ArticleVo;
 import com.yj.domain.vo.PageVo;
 
 /**
@@ -20,7 +20,7 @@ public interface ArticleService extends IService<Article> {
 
     ResponseResult hotArticleList();
 
-    ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId);
+    PageVo<ArticleListVo> articleList(Integer pageNum, Integer pageSize, Long categoryId);
 
     ResponseResult getArticleDetail(Long id);
 

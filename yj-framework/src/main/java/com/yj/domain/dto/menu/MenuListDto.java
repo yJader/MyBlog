@@ -1,4 +1,4 @@
-package com.yj.domain.dto;
+package com.yj.domain.dto.menu;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

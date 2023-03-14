@@ -20,4 +20,6 @@ public interface MenuService extends IService<Menu> {
     List<Menu> selectMenuList(Menu menu);
 
     boolean hasChild(Long menuId);
+
+    List<Menu> buildMenuTree(List<Menu> menus, Long parentId);
 }

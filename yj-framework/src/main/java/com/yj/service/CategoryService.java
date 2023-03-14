@@ -3,8 +3,8 @@ package com.yj.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yj.domain.ResponseResult;
 import com.yj.domain.entity.Category;
-import com.yj.domain.vo.CategoryListVo;
-import com.yj.domain.vo.CategoryVo;
+import com.yj.domain.vo.category.CategoryListVo;
+import com.yj.domain.vo.category.CategoryVo;
 import com.yj.domain.vo.PageVo;
 
 import java.util.List;

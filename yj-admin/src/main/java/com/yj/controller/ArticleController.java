@@ -1,11 +1,11 @@
 package com.yj.controller;
 
 import com.yj.domain.ResponseResult;
-import com.yj.domain.dto.AddArticleDto;
-import com.yj.domain.dto.EditArticleDto;
+import com.yj.domain.dto.article.AddArticleDto;
+import com.yj.domain.dto.article.EditArticleDto;
 import com.yj.domain.entity.Article;
-import com.yj.domain.vo.AdminArticleListVo;
-import com.yj.domain.vo.ArticleVo;
+import com.yj.domain.vo.article.AdminArticleListVo;
+import com.yj.domain.vo.article.ArticleVo;
 import com.yj.domain.vo.PageVo;
 import com.yj.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

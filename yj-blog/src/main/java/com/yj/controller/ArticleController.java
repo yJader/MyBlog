@@ -33,7 +33,7 @@ public class ArticleController {
     @GetMapping("/articleList")
     public ResponseResult articleList(Integer pageNum,Integer pageSize,Long categoryId){
         //之后可以在这里添加对pageNum和pageSize的判断
-        return articleService.articleList(pageNum,pageSize,categoryId);
+        return ResponseResult.okResult(articleService.articleList(pageNum,pageSize,categoryId));
     }
 
     @PutMapping("/updateViewCount/{id}")

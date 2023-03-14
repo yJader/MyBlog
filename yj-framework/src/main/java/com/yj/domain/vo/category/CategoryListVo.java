@@ -1,4 +1,4 @@
-package com.yj.domain.vo;
+package com.yj.domain.vo.category;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;

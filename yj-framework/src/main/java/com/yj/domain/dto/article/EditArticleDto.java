@@ -1,4 +1,4 @@
-package com.yj.domain.dto;
+package com.yj.domain.dto.article;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

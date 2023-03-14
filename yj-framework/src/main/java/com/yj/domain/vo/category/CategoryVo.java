@@ -1,4 +1,4 @@
-package com.yj.domain.vo;
+package com.yj.domain.vo.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

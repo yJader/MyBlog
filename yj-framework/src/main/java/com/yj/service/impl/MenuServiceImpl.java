@@ -84,7 +84,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
      * @author: YJader
      * @date: 2023/2/25 18:49
      */
-    private List<Menu> buildMenuTree(List<Menu> menus, Long parentId) {
+    @Override
+    public List<Menu> buildMenuTree(List<Menu> menus, Long parentId) {
+        // menuId--映射到-->menus集合的位置index, 加速查找
         HashMap<Long, Integer> idIndexMap = new HashMap<>(menus.size());
         for (int i = 0; i <menus.size(); i++) {
             idIndexMap.put(menus.get(i).getId(), i);
@@ -98,6 +100,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 menuTree.add(menu);
             } else {
                 Menu parentMenu = menus.get(idIndexMap.get(menu.getParentId()));
+                // 如果
                 if (Objects.isNull(parentMenu.getChildren())) {
                     parentMenu.setChildren(new ArrayList<>());
                 }

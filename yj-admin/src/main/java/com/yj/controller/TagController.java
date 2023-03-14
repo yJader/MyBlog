@@ -1,13 +1,13 @@
 package com.yj.controller;
 
 import com.yj.domain.ResponseResult;
-import com.yj.domain.dto.AddTagDto;
-import com.yj.domain.dto.TagInfoDto;
-import com.yj.domain.dto.TagListDto;
+import com.yj.domain.dto.tag.AddTagDto;
+import com.yj.domain.dto.tag.TagInfoDto;
+import com.yj.domain.dto.tag.TagListDto;
 import com.yj.domain.entity.Tag;
 import com.yj.domain.vo.PageVo;
-import com.yj.domain.vo.TagInfoVo;
-import com.yj.domain.vo.TagVo;
+import com.yj.domain.vo.tag.TagInfoVo;
+import com.yj.domain.vo.tag.TagVo;
 import com.yj.service.TagService;
 import com.yj.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;

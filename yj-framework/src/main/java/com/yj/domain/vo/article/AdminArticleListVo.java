@@ -1,26 +1,22 @@
-package com.yj.domain.vo;
+package com.yj.domain.vo.article;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.yj.domain.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Description:
  * @Package com.yj.domain.vo
  * @Author yJade
- * @Date 2023-03-08 0:01
+ * @Date 2023-03-07 23:28
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleVo {
+public class AdminArticleListVo {
+
     private Long id;
     /**标题*/
     private String title;
@@ -30,8 +26,6 @@ public class ArticleVo {
     private String summary;
     /**所属分类id*/
     private Long categoryId;
-    /**所属分类名*/
-    private String categoryName;
     /**缩略图*/
     private String thumbnail;
     /**是否置顶（0否，1是）*/
@@ -42,10 +36,5 @@ public class ArticleVo {
     private Long viewCount;
     /**是否允许评论 1是，0否*/
     private String isComment;
-    private Long createBy;
     private Date createTime;
-    private Long updateBy;
-    private Date updateTime;
-
-    private List<Long> tags;
 }

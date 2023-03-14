@@ -1,4 +1,4 @@
-package com.yj.domain.vo;
+package com.yj.domain.vo.menu;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

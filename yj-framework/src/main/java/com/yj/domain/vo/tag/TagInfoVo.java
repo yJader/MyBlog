@@ -1,4 +1,4 @@
-package com.yj.domain.dto;
+package com.yj.domain.vo.tag;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagInfoDto {
+public class TagInfoVo {
     private Long id;
     private String name;
     private String remark;

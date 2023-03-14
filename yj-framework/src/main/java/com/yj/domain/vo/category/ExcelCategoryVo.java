@@ -1,4 +1,4 @@
-package com.yj.domain.vo;
+package com.yj.domain.vo.category;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.AllArgsConstructor;

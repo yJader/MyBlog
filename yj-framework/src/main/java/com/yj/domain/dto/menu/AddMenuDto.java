@@ -1,4 +1,4 @@
-package com.yj.domain.vo;
+package com.yj.domain.dto.menu;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -8,23 +8,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * @Description:
- * @Package com.yj.domain.vo
+ * @Description: 新建菜单Dto
+ * @Package com.yj.domain.dto
  * @Author yJade
- * @Date 2023-03-12 23:53
+ * @Date 2023-03-13 0:28
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class MenuVo {
+@AllArgsConstructor
+public class AddMenuDto {
     /**
      * 菜单ID
      */
+    @TableId
     @ApiModelProperty("菜单ID")
+    @NotNull
     private Long id;
     /**
      * 菜单名称
@@ -81,23 +83,13 @@ public class MenuVo {
      */
     @ApiModelProperty("菜单图标")
     private String icon;
-
-    /**
-     * 更新者
-     */
-    @ApiModelProperty("更新者")
-    private Long updateBy;
-    /**
-     * 更新时间
-     */
-    @ApiModelProperty("更新时间")
-    private Date updateTime;
     /**
      * 备注
      */
     @ApiModelProperty("备注")
     private String remark;
 
-    @ApiModelProperty("")
-    private String delFlag;
+    @ApiModelProperty("子菜单")
+    @TableField(exist = false)
+    private List<Menu> children;
 }

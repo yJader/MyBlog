@@ -1,13 +1,15 @@
 package com.yj.controller;
 
 import com.yj.domain.ResponseResult;
-import com.yj.domain.dto.MenuDto;
-import com.yj.domain.dto.MenuListDto;
+import com.yj.domain.dto.menu.AddMenuDto;
+import com.yj.domain.dto.menu.MenuListDto;
 import com.yj.domain.entity.Menu;
-import com.yj.domain.vo.MenuDetailVo;
-import com.yj.domain.vo.MenuVo;
+import com.yj.domain.vo.menu.MenuDetailVo;
+import com.yj.domain.vo.menu.MenuTreeVo;
+import com.yj.domain.vo.menu.MenuVo;
 import com.yj.service.MenuService;
 import com.yj.utils.BeanCopyUtils;
+import com.yj.utils.SystemConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +37,8 @@ public class MenuController {
     }
 
     @PostMapping("")
-    public ResponseResult add(@RequestBody MenuDto menuDto) {
-        Menu menu = BeanCopyUtils.copyBean(menuDto, Menu.class);
+    public ResponseResult add(@RequestBody AddMenuDto addMenuDto) {
+        Menu menu = BeanCopyUtils.copyBean(addMenuDto, Menu.class);
         menuService.save(menu);
         return ResponseResult.okResult();
     }
@@ -49,9 +51,9 @@ public class MenuController {
     }
 
     @PutMapping
-    public ResponseResult update(@RequestBody MenuDto menuDto) {
+    public ResponseResult update(@RequestBody AddMenuDto addMenuDto) {
         // TODO 是否需要数据验证 (如parentId是否存在(虽然前端已经做过了))
-        Menu menu = BeanCopyUtils.copyBean(menuDto, Menu.class);
+        Menu menu = BeanCopyUtils.copyBean(addMenuDto, Menu.class);
         if (menu.getId().equals(menu.getParentId())) {
             return ResponseResult.errorResult(500, "修改菜单'" + menu.getMenuName() + "'失败，上级菜单不能选择自己");
         }
@@ -67,5 +69,12 @@ public class MenuController {
         menuService.removeById(menuId);
         return ResponseResult.okResult();
     }
-    // TODO 角色列表
+
+    @GetMapping("/treeselect")
+    public ResponseResult<List<MenuTreeVo>> selectTree() {
+        List<Menu> menuList = menuService.list();
+        List<Menu> menuTree = menuService.buildMenuTree(menuList, 0L);
+        List<MenuTreeVo> menuTreeVos = SystemConvertor.converterToMenuTreeVo(menuTree);
+        return ResponseResult.okResult(menuTreeVos);
+    }
 }

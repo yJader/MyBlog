@@ -6,12 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yj.constants.RedisKeyConstants;
 import com.yj.constants.SystemConstants;
 import com.yj.domain.ResponseResult;
-import com.yj.domain.dto.AddArticleDto;
-import com.yj.domain.dto.EditArticleDto;
+import com.yj.domain.dto.article.AddArticleDto;
+import com.yj.domain.dto.article.EditArticleDto;
 import com.yj.domain.entity.Article;
 import com.yj.domain.entity.ArticleTag;
 import com.yj.domain.entity.Category;
 import com.yj.domain.vo.*;
+import com.yj.domain.vo.article.*;
 import com.yj.mapper.ArticleMapper;
 import com.yj.service.ArticleService;
 import com.yj.service.ArticleTagService;
@@ -68,7 +69,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+    public PageVo<ArticleListVo> articleList(Integer pageNum, Integer pageSize, Long categoryId) {
         //查询条件
         LambdaQueryWrapper<Article> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 如果 有categoryId 查询条件要限制为该分类
@@ -98,9 +99,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             articleListVo.setViewCount(getViewCount(articleListVo.getId()));
         }
 
-        PageVo pageVo = new PageVo(articleListVos, page.getTotal());
-
-        return ResponseResult.okResult(pageVo);
+        return new PageVo<>(articleListVos, page.getTotal());
     }
 
     @Override
