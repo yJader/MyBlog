@@ -9,28 +9,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 角色和菜单关联表(RoleMenu)表实体类
+ * 用户和角色关联表(UserRole)表实体类
  *
  * @author makejava
- * @since 2023-03-14 11:47:19
+ * @since 2023-03-15 19:14:58
  */
 @SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("sys_role_menu")
-@ApiModel("角色和菜单关联表")
-public class RoleMenu  {
+@TableName("sys_user_role")
+@ApiModel("用户和角色关联表")
+public class UserRole  {
+    /**
+    * 用户ID
+    */
+    @ApiModelProperty("用户ID")
+    private Long userId;
     /**
     * 角色ID
     */
     @ApiModelProperty("角色ID")
     private Long roleId;
-    /**
-    * 菜单ID
-    */
-    @ApiModelProperty("菜单ID")
-    private Long menuId;
 
 }
 

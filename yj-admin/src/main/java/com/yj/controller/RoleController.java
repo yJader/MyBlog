@@ -6,12 +6,15 @@ import com.yj.domain.dto.role.ChangeRoleStatusDto;
 import com.yj.domain.dto.role.UpdateRoleDto;
 import com.yj.domain.entity.Role;
 import com.yj.domain.vo.PageVo;
+import com.yj.domain.vo.role.ListAllRoleVo;
 import com.yj.domain.vo.role.RoleDetailVo;
 import com.yj.domain.vo.role.RoleListVo;
 import com.yj.service.RoleService;
 import com.yj.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -46,7 +49,7 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseResult<RoleDetailVo> detail(@PathVariable Long id){
+    public ResponseResult<RoleDetailVo> detail(@PathVariable Long id) {
         Role role = roleService.getById(id);
         RoleDetailVo roleDetailVo = BeanCopyUtils.copyBean(role, RoleDetailVo.class);
         return ResponseResult.okResult(roleDetailVo);
@@ -59,7 +62,7 @@ public class RoleController {
     }
 
     /**
-     * @description: 逻辑删除角色,不删除角色对应权限
+     * @description: 逻辑删除角色, 不删除角色对应权限
      * @param: id
      * @return: com.yj.domain.ResponseResult
      * @author: YJader
@@ -69,5 +72,13 @@ public class RoleController {
     public ResponseResult delete(@PathVariable Long id) {
         roleService.removeById(id);
         return ResponseResult.okResult();
+    }
+
+    @GetMapping("/listAllRole")
+    public ResponseResult<ListAllRoleVo> listAllRole() {
+        List<Role> roles =  roleService.listAllRole();
+        List<ListAllRoleVo> listAllRoleVos = BeanCopyUtils.copyBeanList(roles, ListAllRoleVo.class);
+
+        return ResponseResult.okResult(listAllRoleVos);
     }
 }

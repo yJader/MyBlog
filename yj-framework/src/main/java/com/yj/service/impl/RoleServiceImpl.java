@@ -3,15 +3,18 @@ package com.yj.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yj.constants.SystemConstants;
 import com.yj.domain.dto.role.AddRoleDto;
 import com.yj.domain.dto.role.UpdateRoleDto;
 import com.yj.domain.entity.Role;
 import com.yj.domain.entity.RoleMenu;
+import com.yj.domain.entity.UserRole;
 import com.yj.domain.vo.PageVo;
 import com.yj.domain.vo.role.RoleListVo;
 import com.yj.mapper.RoleMapper;
 import com.yj.service.RoleMenuService;
 import com.yj.service.RoleService;
+import com.yj.service.UserRoleService;
 import com.yj.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Autowired
     private RoleMenuService roleMenuService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     @Override
     public List<String> selectRoleKeyByUserId(Long id) {
@@ -54,6 +60,32 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         updateById(role);
         roleMenuService.deleteRoleMenuByRoleId(updateRoleDto.getId());
         insertRoleMenu(updateRoleDto.getId(), updateRoleDto.getMenuIds());
+    }
+
+    @Override
+    public List<Role> listAllRole() {
+        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Role::getStatus, SystemConstants.STATUS_NORMAL);
+        queryWrapper.orderByAsc(Role::getRoleSort);
+
+        List<Role> roles = list(queryWrapper);
+        return roles;
+    }
+
+    @Override
+    public List<Role> selectAllRole() {
+        return list(new LambdaQueryWrapper<Role>().eq(Role::getStatus, SystemConstants.STATUS_NORMAL));
+    }
+
+    @Override
+    public List<Long> selectRoleIdByUserId(Long userId) {
+        LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserRole::getUserId, userId);
+        List<UserRole> userRoles = userRoleService.list(queryWrapper);
+        List<Long> roleIds = userRoles.stream()
+                .map(UserRole::getRoleId)
+                .collect(Collectors.toList());
+        return roleIds;
     }
 
     @Override
