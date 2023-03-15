@@ -3,20 +3,21 @@ package com.yj.controller;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.yj.domain.ResponseResult;
+import com.yj.domain.dto.category.AddCategoryDto;
+import com.yj.domain.dto.category.UpdateCategoryDto;
 import com.yj.domain.entity.Category;
-import com.yj.domain.vo.category.CategoryListVo;
-import com.yj.domain.vo.category.CategoryAllListVo;
-import com.yj.domain.vo.category.ExcelCategoryVo;
 import com.yj.domain.vo.PageVo;
+import com.yj.domain.vo.category.CategoryAllListVo;
+import com.yj.domain.vo.category.CategoryDetailVo;
+import com.yj.domain.vo.category.CategoryListVo;
+import com.yj.domain.vo.category.ExcelCategoryVo;
 import com.yj.enums.AppHttpCodeEnum;
 import com.yj.service.CategoryService;
 import com.yj.utils.BeanCopyUtils;
 import com.yj.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -32,6 +33,13 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    @GetMapping("/{id}")
+    public ResponseResult detail(@PathVariable String id) {
+        Category category = categoryService.getById(id);
+        CategoryDetailVo categoryDetailVo = BeanCopyUtils.copyBean(category, CategoryDetailVo.class);
+        return ResponseResult.okResult(categoryDetailVo);
+    }
 
     @GetMapping("/listAllCategory")
     public ResponseResult<List<CategoryAllListVo>> listAllCategory() {
@@ -65,5 +73,19 @@ public class CategoryController {
             ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
             WebUtils.renderString(response, JSON.toJSONString(result));
         }
+    }
+
+    @PostMapping
+    public ResponseResult add(@RequestBody AddCategoryDto addCategoryDto) {
+        Category category = BeanCopyUtils.copyBean(addCategoryDto, Category.class);
+        categoryService.save(category);
+        return ResponseResult.okResult();
+    }
+
+    @PutMapping
+    public ResponseResult update(@RequestBody UpdateCategoryDto updateCategoryDto) {
+        Category category = BeanCopyUtils.copyBean(updateCategoryDto, Category.class);
+        categoryService.updateById(category);
+        return ResponseResult.okResult();
     }
 }
