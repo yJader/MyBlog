@@ -30,7 +30,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         // 条件构造
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
 
-        queryWrapper.eq(StringUtils.hasText(tagListDto.getName()), Tag::getName, tagListDto.getName());
+        queryWrapper.like(StringUtils.hasText(tagListDto.getName()), Tag::getName, tagListDto.getName());
         queryWrapper.eq(StringUtils.hasText(tagListDto.getRemark()), Tag::getRemark, tagListDto.getRemark());
 
         // 分页查询

@@ -100,7 +100,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public PageVo<UserListVo> selectUserPage(User user, Integer pageNum, Integer pageSize) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(StringUtils.hasText(user.getUserName()), User::getUserName, user.getUserName());
+        // 模糊查询
+        queryWrapper.like(StringUtils.hasText(user.getUserName()), User::getUserName, user.getUserName());
         queryWrapper.eq(StringUtils.hasText(user.getPhonenumber()), User::getPhonenumber, user.getPhonenumber());
         queryWrapper.eq(StringUtils.hasText(user.getStatus()), User::getStatus, user.getStatus());
 

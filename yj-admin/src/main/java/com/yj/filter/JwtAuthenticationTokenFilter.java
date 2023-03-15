@@ -9,6 +9,7 @@ import com.yj.utils.JwtUtil;
 import com.yj.utils.RedisCache;
 import com.yj.utils.WebUtils;
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +30,7 @@ import java.util.Objects;
  * @author: YJader
  * @date: 2023/2/14 19:01
  */
+@Slf4j
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
@@ -37,6 +39,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("访问路径:{}", request.getRequestURI());
         //获取请求头中的token
         String token = request.getHeader("token");
         if(!StringUtils.hasText(token)){

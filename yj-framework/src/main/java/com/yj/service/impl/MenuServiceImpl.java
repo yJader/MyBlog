@@ -77,8 +77,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<Menu> selectMenuList(Menu menu) {
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
-        // 模糊查询
-        queryWrapper.eq(StringUtils.hasText(menu.getMenuName()), Menu::getMenuName, menu.getMenuName());
+        // 模糊查询 debug:加了模糊查询的注释还写的是eq, 笑死
+        queryWrapper.like(StringUtils.hasText(menu.getMenuName()), Menu::getMenuName, menu.getMenuName());
         queryWrapper.eq(StringUtils.hasText(menu.getStatus()), Menu::getStatus, menu.getStatus());
         // 排序
         queryWrapper.orderByAsc(Menu::getParentId, Menu::getOrderNum);
