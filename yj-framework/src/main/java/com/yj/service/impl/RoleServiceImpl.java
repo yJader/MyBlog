@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yj.domain.dto.role.AddRoleDto;
+import com.yj.domain.dto.role.UpdateRoleDto;
 import com.yj.domain.entity.Role;
 import com.yj.domain.entity.RoleMenu;
 import com.yj.domain.vo.PageVo;
-import com.yj.domain.vo.RoleVo;
+import com.yj.domain.vo.role.RoleListVo;
 import com.yj.mapper.RoleMapper;
 import com.yj.service.RoleMenuService;
 import com.yj.service.RoleService;
@@ -37,20 +38,26 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public void add(AddRoleDto addRoleDto) {
+    public void insertRole(AddRoleDto addRoleDto) {
         // 添加角色
         Role role = BeanCopyUtils.copyBean(addRoleDto, Role.class);
         save(role);
 
         // 添加角色对应菜单
-        List<RoleMenu> roleMenus = addRoleDto.getMenuIds().stream()
-                .map(id -> new RoleMenu(role.getId(), id))
-                .collect(Collectors.toList());
-        roleMenuService.saveBatch(roleMenus);
+        // mybatis plus的save会自动为role赋插入后的id
+        insertRoleMenu(role.getId(), addRoleDto.getMenuIds());
     }
 
     @Override
-    public PageVo<RoleVo> roleList(Integer pageNum, Integer pageSize, String roleName, String status) {
+    public void updateRole(UpdateRoleDto updateRoleDto) {
+        Role role = BeanCopyUtils.copyBean(updateRoleDto, Role.class);
+        updateById(role);
+        roleMenuService.deleteRoleMenuByRoleId(updateRoleDto.getId());
+        insertRoleMenu(updateRoleDto.getId(), updateRoleDto.getMenuIds());
+    }
+
+    @Override
+    public PageVo<RoleListVo> roleList(Integer pageNum, Integer pageSize, String roleName, String status) {
         LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
         // 针对角色名称进行模糊查询
         queryWrapper.like(StringUtils.hasText(roleName), Role::getRoleName, roleName);
@@ -62,11 +69,16 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         Page<Role> rolePage = new Page<Role>(pageNum, pageSize);
         page(rolePage, queryWrapper);
         List<Role> records = rolePage.getRecords();
-        List<RoleVo> roleVos = BeanCopyUtils.copyBeanList(records, RoleVo.class);
+        List<RoleListVo> roleListVos = BeanCopyUtils.copyBeanList(records, RoleListVo.class);
 
-        return new PageVo<>(roleVos, rolePage.getTotal());
+        return new PageVo<>(roleListVos, rolePage.getTotal());
     }
 
-
+    private void insertRoleMenu(Long roleId, List<Long> menuIds) {
+        List<RoleMenu> roleMenuList = menuIds.stream()
+                .map(menuId -> new RoleMenu(roleId, menuId))
+                .collect(Collectors.toList());
+        roleMenuService.saveBatch(roleMenuList);
+    }
 }
 

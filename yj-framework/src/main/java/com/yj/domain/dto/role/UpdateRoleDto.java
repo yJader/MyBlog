@@ -1,20 +1,22 @@
-package com.yj.domain.vo;
+package com.yj.domain.dto.role;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Description:
- * @Package com.yj.domain.vo
+ * @Package com.yj.domain.dto.role
  * @Author yJade
- * @Date 2023-03-13 19:31
+ * @Date 2023-03-14 21:11
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleVo {
+public class UpdateRoleDto {
     /**
      * 角色ID
      */
@@ -40,4 +42,14 @@ public class RoleVo {
      */
     @ApiModelProperty("角色状态（0正常 1停用）")
     private String status;
+    /**
+     * 角色对应菜单id
+     */
+    @ApiModelProperty("角色对应菜单id")
+    private List<Long> menuIds;
+    /**
+     * 备注
+     */
+    @ApiModelProperty("备注")
+    private String remark;
 }

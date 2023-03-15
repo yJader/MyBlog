@@ -1,23 +1,23 @@
-package com.yj.domain.vo.category;
+package com.yj.domain.vo.tag;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author yJade
- * @Date 2023-02-10 19:33
+ * @Description:
  * @Package com.yj.domain.vo
- * @Description: 
+ * @Author yJade
+ * @Date 2023-03-01 23:39
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryVo {
+public class TagListVo {
     private Long id;
-    private String name;
+
     /**
-     * 描述
+     * 标签名
      */
-    private String description;
+    private String name;
 }

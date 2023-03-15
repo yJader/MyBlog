@@ -2,9 +2,10 @@ package com.yj.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yj.domain.dto.role.AddRoleDto;
+import com.yj.domain.dto.role.UpdateRoleDto;
 import com.yj.domain.entity.Role;
 import com.yj.domain.vo.PageVo;
-import com.yj.domain.vo.RoleVo;
+import com.yj.domain.vo.role.RoleListVo;
 
 import java.util.List;
 
@@ -16,9 +17,11 @@ import java.util.List;
  */
 public interface RoleService extends IService<Role> {
 
-    PageVo<RoleVo> roleList(Integer pageNum, Integer pageSize, String roleName, String status);
+    PageVo<RoleListVo> roleList(Integer pageNum, Integer pageSize, String roleName, String status);
 
     List<String> selectRoleKeyByUserId(Long id);
 
-    void add(AddRoleDto addRoleDto);
+    void insertRole(AddRoleDto addRoleDto);
+
+    void updateRole(UpdateRoleDto roleDto);
 }

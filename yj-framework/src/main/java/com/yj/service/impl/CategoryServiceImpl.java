@@ -8,7 +8,7 @@ import com.yj.domain.ResponseResult;
 import com.yj.domain.entity.Article;
 import com.yj.domain.entity.Category;
 import com.yj.domain.vo.category.CategoryListVo;
-import com.yj.domain.vo.category.CategoryVo;
+import com.yj.domain.vo.category.CategoryAllListVo;
 import com.yj.domain.vo.PageVo;
 import com.yj.mapper.CategoryMapper;
 import com.yj.service.ArticleService;
@@ -53,18 +53,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         List<Category> categoryList = listByIds(categories).stream().
                 filter(category -> SystemConstants.STATUS_NORMAL.equals(category.getStatus()))
                 .collect(Collectors.toList());
-        List<CategoryVo> categoryVos = BeanCopyUtils.copyBeanList(categoryList, CategoryVo.class);
-        return ResponseResult.okResult(categoryVos);
+        List<CategoryAllListVo> categoryAllListVos = BeanCopyUtils.copyBeanList(categoryList, CategoryAllListVo.class);
+        return ResponseResult.okResult(categoryAllListVos);
     }
 
     @Override
-    public List<CategoryVo> listAllCategory() {
+    public List<CategoryAllListVo> listAllCategory() {
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Category::getStatus, SystemConstants.CATEGORY_STATUS_NORMAL);
         List<Category> list = list(queryWrapper);
-        List<CategoryVo> categoryVos = BeanCopyUtils.copyBeanList(list, CategoryVo.class);
+        List<CategoryAllListVo> categoryAllListVos = BeanCopyUtils.copyBeanList(list, CategoryAllListVo.class);
 
-        return categoryVos;
+        return categoryAllListVos;
     }
 
     @Override

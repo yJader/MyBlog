@@ -26,10 +26,17 @@ public class SecurityUtils
     }
 
     /**
-     * 判断当前登录用户是否是管理员
+     * 判断当前登录用户是否是管理员(通过SecurityContextHolder中保存的用户信息获取id)
      */
     public static Boolean isAdmin(){
         Long id = getLoginUser().getUser().getId();
+        return id != null && 1L == id;
+    }
+
+    /**
+     * 判断当前登录用户是否是管理员(传参获取id)
+     */
+    public static Boolean isAdmin(Long id){
         return id != null && 1L == id;
     }
 

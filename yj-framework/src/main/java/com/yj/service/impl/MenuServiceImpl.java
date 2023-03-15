@@ -2,6 +2,7 @@ package com.yj.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yj.constants.MenuConstants;
 import com.yj.constants.SystemConstants;
 import com.yj.domain.entity.Menu;
 import com.yj.mapper.MenuMapper;
@@ -45,15 +46,31 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         MenuMapper menuMapper = getBaseMapper();
         List<Menu> menus;
         // 判断是否是管理员
-        if (SecurityUtils.isAdmin()) {
+        if (SecurityUtils.isAdmin(userId)) {
             // 如果是, 返回所有符合要求的Menu
              menus = menuMapper.selectAllRouterMenu();
-
         } else {
             menus = menuMapper.selectRouterMenuByUserId(userId);
         }
         // 构建menuTree
-        List<Menu> menuTree = buildMenuTree(menus, 0L);
+        List<Menu> menuTree = buildMenuTree(menus);
+        return menuTree;
+    }
+
+    @Override
+    public List<Menu> selectRouterMenuTreeByRoleId(Long roleId) {
+        MenuMapper menuMapper = getBaseMapper();
+        List<Menu> menus;
+        // 查询角色对应role
+        if (MenuConstants.SUPER_ADMINISTRATOR_ROLE_ID.equals(roleId)) {
+            // 返回所有正常的菜单
+            menus = menuMapper.selectAllRouterMenu();
+        } else {
+            menus = menuMapper.selectRouterMenuByRoleId(roleId);
+        }
+
+        // 建menuTree
+        List<Menu> menuTree = buildMenuTree(menus);
         return menuTree;
     }
 
@@ -76,16 +93,50 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         return count(queryWrapper) != 0;
     }
 
+//    /**
+//     * @description: 获取一个指定以指定id为parent的菜单树
+//     * @param: menus
+//     * @param: parentId
+//     * @return: java.util.List<com.yj.domain.entity.Menu>
+//     * @author: YJader
+//     * @date: 2023/2/25 18:49
+//     */
+//    @Override
+//    public List<Menu> buildMenuTree(List<Menu> menus, Long parentId) {
+//        // menuId--映射到-->menus集合的位置index, 加速查找
+//        HashMap<Long, Integer> idIndexMap = new HashMap<>(menus.size());
+//        for (int i = 0; i <menus.size(); i++) {
+//            idIndexMap.put(menus.get(i).getId(), i);
+//        }
+//
+//        ArrayList<Menu> menuTree = new ArrayList<>();
+//        // 更新子菜单
+//        for (Menu menu : menus) {
+//            // 第一层菜单
+//            if (parentId.equals(menu.getParentId())) {
+//                menuTree.add(menu);
+//            } else {
+//                Menu parentMenu = menus.get(idIndexMap.get(menu.getParentId()));
+//                // 如果
+//                if (Objects.isNull(parentMenu.getChildren())) {
+//                    parentMenu.setChildren(new ArrayList<>());
+//                }
+//                parentMenu.getChildren().add(menu);
+//            }
+//        }
+//
+//        return menuTree;
+//    }
+
     /**
-     * @description: 获取一个指定以指定id为parent的菜单树
+     * @description: 重构:返回一个树型菜单
      * @param: menus
-     * @param: parentId
      * @return: java.util.List<com.yj.domain.entity.Menu>
      * @author: YJader
-     * @date: 2023/2/25 18:49
+     * @date: 2023/3/14 20:01
      */
     @Override
-    public List<Menu> buildMenuTree(List<Menu> menus, Long parentId) {
+    public List<Menu> buildMenuTree(List<Menu> menus) {
         // menuId--映射到-->menus集合的位置index, 加速查找
         HashMap<Long, Integer> idIndexMap = new HashMap<>(menus.size());
         for (int i = 0; i <menus.size(); i++) {
@@ -95,8 +146,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         ArrayList<Menu> menuTree = new ArrayList<>();
         // 更新子菜单
         for (Menu menu : menus) {
-            // 第一层菜单
-            if (parentId.equals(menu.getParentId())) {
+            // 父菜单不存在, 为第一层菜单
+            if (!idIndexMap.containsKey(menu.getParentId())) {
                 menuTree.add(menu);
             } else {
                 Menu parentMenu = menus.get(idIndexMap.get(menu.getParentId()));
@@ -109,6 +160,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         }
 
         return menuTree;
+    }
+
+    @Override
+    public List<Long> selectMenuIdListByRoleId(Long roleId) {
+        return getBaseMapper().selectMenuIdListByRoleId(roleId);
     }
 
 

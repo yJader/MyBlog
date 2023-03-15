@@ -7,7 +7,7 @@ import com.yj.domain.ResponseResult;
 import com.yj.domain.dto.tag.TagListDto;
 import com.yj.domain.entity.Tag;
 import com.yj.domain.vo.PageVo;
-import com.yj.domain.vo.tag.TagVo;
+import com.yj.domain.vo.tag.TagListVo;
 
 /**
  * 标签(Tag)表服务接口
@@ -26,7 +26,7 @@ public interface TagService extends IService<Tag> {
      * @author: YJader
      * @date: 2023/2/27 22:11
      */
-    ResponseResult<PageVo<TagVo>> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto);
+    ResponseResult<PageVo<TagListVo>> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto);
 
-    List<TagVo> listAllTag();
+    List<TagListVo> listAllTag();
 }

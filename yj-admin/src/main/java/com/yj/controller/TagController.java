@@ -7,7 +7,7 @@ import com.yj.domain.dto.tag.TagListDto;
 import com.yj.domain.entity.Tag;
 import com.yj.domain.vo.PageVo;
 import com.yj.domain.vo.tag.TagInfoVo;
-import com.yj.domain.vo.tag.TagVo;
+import com.yj.domain.vo.tag.TagListVo;
 import com.yj.service.TagService;
 import com.yj.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,14 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping("/list")
-    public ResponseResult<PageVo<TagVo>> list(Integer pageNum, Integer pageSize, TagListDto tagListDto){
+    public ResponseResult<PageVo<TagListVo>> list(Integer pageNum, Integer pageSize, TagListDto tagListDto){
         return tagService.pageTagList(pageNum,pageSize,tagListDto);
     }
 
 
     @GetMapping("/listAllTag")
     public ResponseResult listAllTag(){
-        List<TagVo> list = tagService.listAllTag();
+        List<TagListVo> list = tagService.listAllTag();
         return ResponseResult.okResult(list);
     }
 

@@ -12,4 +12,5 @@ import com.yj.domain.entity.RoleMenu;
  */
 public interface RoleMenuService extends IService<RoleMenu> {
 
+    void deleteRoleMenuByRoleId(Long id);
 }

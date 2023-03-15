@@ -7,7 +7,7 @@ import com.yj.domain.ResponseResult;
 import com.yj.domain.dto.tag.TagListDto;
 import com.yj.domain.entity.Tag;
 import com.yj.domain.vo.PageVo;
-import com.yj.domain.vo.tag.TagVo;
+import com.yj.domain.vo.tag.TagListVo;
 import com.yj.mapper.TagMapper;
 import com.yj.service.TagService;
 import com.yj.utils.BeanCopyUtils;
@@ -26,7 +26,7 @@ import java.util.List;
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagService {
 
     @Override
-    public ResponseResult<PageVo<TagVo>> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
+    public ResponseResult<PageVo<TagListVo>> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
         // 条件构造
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
 
@@ -37,19 +37,19 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         Page<Tag> tagPage = new Page<>(pageNum, pageSize);
         page(tagPage, queryWrapper);
         // 封装数据返回
-        PageVo<TagVo> pageVo = new PageVo(tagPage.getRecords(), tagPage.getTotal());
+        PageVo<TagListVo> pageVo = new PageVo(tagPage.getRecords(), tagPage.getTotal());
 
         return ResponseResult.okResult(pageVo);
     }
 
     @Override
-    public List<TagVo> listAllTag() {
+    public List<TagListVo> listAllTag() {
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.select(Tag::getId, Tag::getName);
         List<Tag> list = list(queryWrapper);
-        List<TagVo> tagVos = BeanCopyUtils.copyBeanList(list, TagVo.class);
+        List<TagListVo> tagListVos = BeanCopyUtils.copyBeanList(list, TagListVo.class);
 
-        return tagVos;
+        return tagListVos;
     }
 
 

@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.yj.domain.ResponseResult;
 import com.yj.domain.entity.Category;
 import com.yj.domain.vo.category.CategoryListVo;
-import com.yj.domain.vo.category.CategoryVo;
+import com.yj.domain.vo.category.CategoryAllListVo;
 import com.yj.domain.vo.category.ExcelCategoryVo;
 import com.yj.domain.vo.PageVo;
 import com.yj.enums.AppHttpCodeEnum;
@@ -34,8 +34,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/listAllCategory")
-    public ResponseResult<List<CategoryVo>> listAllCategory() {
-        List<CategoryVo> list = categoryService.listAllCategory();
+    public ResponseResult<List<CategoryAllListVo>> listAllCategory() {
+        List<CategoryAllListVo> list = categoryService.listAllCategory();
         return ResponseResult.okResult(list);
     }
 
