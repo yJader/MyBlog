@@ -1,0 +1,14 @@
+com\yj\controller\TagController.class
+com\yj\controller\LinkController.class
+com\yj\controller\LoginController.class
+com\yj\BlogAdminApplication.class
+com\yj\config\SwaggerConfig.class
+com\yj\filter\JwtAuthenticationTokenFilter.class
+com\yj\config\SecurityConfiguration.class
+com\yj\controller\UserController.class
+com\yj\controller\UploadController.class
+com\yj\controller\RoleController.class
+com\yj\config\Knife4jConfig.class
+com\yj\controller\CategoryController.class
+com\yj\controller\ArticleController.class
+com\yj\controller\MenuController.class
