@@ -6,7 +6,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at 47.120.2.211:8080
 npm run dev
 
 
