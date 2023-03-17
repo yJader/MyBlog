@@ -37,6 +37,11 @@
    !/SGBlog/resources/front-end-project/*
    ```
    咋回事啊, 啥情况啊, 这咋不对啊
+4. ```
+   Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/app/mysql/conf/my.cnf" to rootfs at "/etc/my.cnf": mount /app/mysql/conf/my.cnf:/etc/my.cnf (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type
+   ```
+   docker启动服务失败啊啊啊啊啊
+   
 
 ## 来点乐子
 1. 关于写Dto和Vo
