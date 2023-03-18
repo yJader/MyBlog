@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 16/03/2023 23:33:29
+ Date: 18/03/2023 20:58:23
 */
 
 SET NAMES utf8mb4;
@@ -393,7 +393,7 @@ CREATE TABLE `yj_article`  (
   `update_time` datetime NULL DEFAULT NULL,
   `del_flag` int NULL DEFAULT 0 COMMENT '删除标志（0代表未删除，1代表已删除）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of yj_article
