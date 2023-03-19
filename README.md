@@ -37,10 +37,6 @@
    !/SGBlog/resources/front-end-project/*
    ```
    咋回事啊, 啥情况啊, 这咋不对啊
-4. ```
-   Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/app/mysql/conf/my.cnf" to rootfs at "/etc/my.cnf": mount /app/mysql/conf/my.cnf:/etc/my.cnf (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type
-   ```
-   docker启动服务失败啊啊啊啊啊
    
 
 ## 来点乐子
@@ -50,4 +46,15 @@
    因此采用了极为先进的ChatGpt来帮助我们检查需要删去实体类的哪个属性来匹配接口要求。
 2. 有一说一 后台管理大部分都是crud, 唯一点含金量的就是自己写的建立菜单树的"算法"
    - 但是这么简单的玩意也配叫算法吗_(:з」∠)_
-   
+
+## 关于部署的一堆问题
+> 参考 : http://t.csdn.cn/GmpMy
+1. 打包方式出bug, 最后直接改上springboot官方的spring-boot-maven-plugin, 解决
+2. 按照教程使用compose部署, 最后因为配置问题各种错误, 最后再gpt哥的帮助下一个个启动服务
+3. mysql和redis的url忘记改, 又要修改重新打包上传
+   - 悲报, 改完url还是有问题
+   - 问题描述 : 项目本地使用服务器mysql, redis运行正常, 但打包后启动报错
+   - 好消息 : 打包后可以正常运行了
+      坏消息 : 传到服务器之后还是异常退出 (可能是restart容器不会更新jar? 没学docker真麻烦)
+   - 另附:测试时发现部分接口忘记添加返回值了
+4. 万恶的网络, 一次xshell和xftp连不上, 一次只有xftp连不上, 还我流量钱

@@ -57,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public ResponseResult updateUserInfo(User user) {
         updateById(user);
-        return null;
+        return ResponseResult.okResult();
     }
 
     @Override

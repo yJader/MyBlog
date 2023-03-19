@@ -123,7 +123,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult updateViewCount(Long id) {
         //更新redis中对应 id 的浏览量
         redisCache.incrementCacheMapValue(RedisKeyConstants.ARTICLE_VIEW_COUNT, id.toString(), 1);
-        return null;
+        return ResponseResult.okResult();
     }
 
     @Override
