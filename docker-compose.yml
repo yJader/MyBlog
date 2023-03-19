@@ -6,7 +6,7 @@ version: "3"
 services:
   yj_blog:
 #微服务镜像  
-    image: yj_blog:1.0
+    image: yj_blog:1.1
     container_name: yj_blog
     ports:
       - "7777:7777"
@@ -23,7 +23,7 @@ services:
 
   yj_admin:
 #微服务镜像
-    image: yj_admin:1.0
+    image: yj_admin:1.1
     container_name: yj_admin
     ports:
       - "8989:8989"
@@ -43,7 +43,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - /app/redis/redis.conf:/etc/redis/redis.conf
+      - /app/redis/redis.conf :/etc/redis/redis.conf
       - /app/redis/data:/data
     networks: 
       - blog_network
