@@ -62,3 +62,6 @@ yarn-error.log*
 
 /yj-framework/src/main/resources/key.properties
 
+/yj-admin/target/
+/yj-blog/target/
+/yj-framework/target/
